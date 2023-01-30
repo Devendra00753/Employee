@@ -26,7 +26,6 @@ public class Users_ {
 	private Long phoneNumber;
 
 	@NotBlank(message = "Password is required")
-	@Size(min = 8, message = "Password must be at least 8 characters")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", message = "Password must be combination of Upper Case ,Lower Case, Numbers and Special characters")
 	private String password;
 
