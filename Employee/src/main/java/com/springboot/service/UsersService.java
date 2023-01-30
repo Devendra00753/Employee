@@ -1,5 +1,6 @@
 package com.springboot.service;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +14,12 @@ public class UsersService {
 	private UsersRepository usersRepository;
 
 	public Users_  addUser(Users_ users)  {
-		//validations
-//		String res=Validater.allvalidations(users);
-//		if(res!=null){
-//			throw new Exception(res);
-//		}
+		String salt=BCrypt.gensalt(10);
+		String hashedPassword=BCrypt.hashpw(users.getPassword(), salt);
+		System.out.println(salt);
+		System.out.println(hashedPassword);
+		// users.setPassword(hashedPassword);
 		return usersRepository.save(users);
-		// return users;
 	}
 
 }
