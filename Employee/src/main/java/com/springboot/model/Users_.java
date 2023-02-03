@@ -22,13 +22,16 @@ public class Users_ {
 	@Email(message = "Invalid email address")
 	private String email;
 
-	@jakarta.validation.constraints.Min(value = 10, message = "The value must be 10 digits")
-	private Long phoneNumber;
+	@NotBlank(message = "Phone Number is required")
+	@Size(min = 10, message = "The value must be 10 digits")
+	@Pattern(regexp = "^[0-9]+$", message = "PhoneNumber can only contain  numbers")
+	private String phoneNumber;
 
 	@NotBlank(message = "Password is required")
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", message = "Password must be combination of Upper Case ,Lower Case, Numbers and Special characters")
+	@Size(min = 8, message = "Password must be 8 characters")
+	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}", message = "Password must be combination of Upper Case ,Lower Case, Numbers and Special characters")
 	private String password;
-
+	
 	private String role;
 
 	public Long getId() {
@@ -55,11 +58,11 @@ public class Users_ {
 		this.email = email;
 	}
 
-	public Long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
