@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Employee_Table")
@@ -13,10 +16,24 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "Name is required")
+	@Size(min = 3, max = 20, message = "Name must be between 3 to 20 characters")
+	@Pattern(regexp = "^[a-zA-Z]+$", message = "Name can only contain letters ")
 	private String name;
+	
+	@NotBlank(message = "designation is required")
+	@Size(min = 3, max = 20, message = "designation must be between 3 to 20 characters")
+	@Pattern(regexp = "^[a-zA-Z]+$", message = "designation can only contain letters ")
 	private String designation;
-	private Long salary;
-	private Long phoneNumber;
+	
+	@NotBlank(message = "Salary is required")
+	@Pattern(regexp = "^[0-9]+$", message = "Salary can only contain  numbers")
+	private String salary;
+	
+	@NotBlank(message = "Phone Number is required")
+	@Size(min = 10, message = "The value must be 10 digits")
+	@Pattern(regexp = "^[0-9]+$", message = "PhoneNumber can only contain  numbers")
+	private String phoneNumber;
 	
 	
 	public Long getId() {
@@ -49,22 +66,22 @@ public class Employee {
 	}
 
 
-	public Long getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 
 
-	public void setSalary(Long salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 
 
-	public Long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
 
-	public void setPhoneNumber(Long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

@@ -56,14 +56,11 @@ public class EmployeeService {
 		return employeeRepository.save(employee_);
 	}
 	
-	//add Employee
 
-	public Object addEmployee(Employee employee) throws Exception  {
-//			String result=Validater.allvalidations(employee);
-//			if(result=="ALL OK") {
+	public Object addEmployee(Employee employee)   {
+
 			return employeeRepository.save(employee);
-//			}
-//			throw new Exception(result);
+
 	
 	}
 	

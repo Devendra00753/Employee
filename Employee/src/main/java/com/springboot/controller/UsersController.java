@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.springboot.model.Users_;
 import com.springboot.service.UsersService;
 
@@ -26,6 +29,7 @@ public class UsersController {
 	@RequestMapping("/signup")
 	public String sigUp(Model model) {
 		// Users_ newUser=new Users_();
+		System.out.println();
 		model.addAttribute("newUser", new Users_());
 		return "Users/signup";
 	}
@@ -42,7 +46,14 @@ public class UsersController {
 
 	@GetMapping("/signin")
 	public String sigin() {
+		System.out.println("Sign in");
 		return "Users/signin";
 	}
+	 @GetMapping("/unauthorized")
+	  public String unauthorized() {
+	    return "unauthorized";
+	  }
+	
+
 
 }

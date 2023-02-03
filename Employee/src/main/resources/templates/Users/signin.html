@@ -61,25 +61,34 @@
         margin: 0 auto;
 		margin-top: 8%;
       }
+      .invalid{
+		  color: crimson;
+		font-family: 'Times New Roman', Times, serif;
+	  }
+	  .logout{
+		   color: rgb(0, 128, 128);
+		font-family: 'Times New Roman', Times, serif;
+	  }
     </style>
   </head>
   <body>
+
     <div class="form">
-      <form action="#">
+      <form th:action="@{/signin}" action="#" method="post">
 		<h1>Welcome to softsuave</h1>
 		<p>Please Login with Your Details</p>
+		
+				<div th:if="${param.error}" class="invalid">
+			Invalid username and password.</div>
+		<div th:if="${param.logout}" class="logout">
+			You have been logged out.</div>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
         <br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
 		<br>
-		<label for="usertype" class="select">Choose a UserType:</label>
-		<select id="usertype">
- 		<option value="Admin">Admin</option>
-  		<option value="User">User</option>
-		</select>
-        <br>
+		
         <button type="submit">Sign in</button>
 		<p>Don't you have an Account?</p>
 		<a th:href="@{/signup}">sign up</a>
