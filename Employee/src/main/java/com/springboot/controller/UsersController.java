@@ -19,12 +19,10 @@ public class UsersController {
 
 	@Autowired
 	private UsersService usersService;
-	
 
 	@Autowired
 	private UsersRepository usersRepository;
 
-	
 	@GetMapping("/home")
 	public String home() {
 		return "Users/home";
@@ -39,19 +37,20 @@ public class UsersController {
 	}
 
 	@RequestMapping("/reg")
-	public String reg(@Valid @ModelAttribute("newUser") Users_ users, BindingResult result, Model model) throws Exception {
-						
+	public String reg(@Valid @ModelAttribute("newUser") Users_ users, BindingResult result, Model model)
+			throws Exception {
+
 		Users_ existingUser = usersRepository.findByEmail(users.getEmail());
 		if (existingUser != null) {
-		    result.rejectValue("email", "Duplicate.user.email", "Email already exists");
-		 }
+			result.rejectValue("email", "Duplicate.user.email", "Email already exists");
+		}
 		if (result.hasErrors()) {
 			return "Users/signup";
-			}
-			
+		}
+
 		usersService.addUser(users);
 		return "redirect:/signup?success=true";
-		
+
 	}
 
 	@GetMapping("/signin")
@@ -59,11 +58,10 @@ public class UsersController {
 		System.out.println("Sign in");
 		return "Users/signin";
 	}
-	 @GetMapping("/unauthorized")
-	  public String unauthorized() {
-	    return "unauthorized";
-	  }
-	
 
+	@GetMapping("/unauthorized")
+	public String unauthorized() {
+		return "unauthorized";
+	}
 
 }

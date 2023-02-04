@@ -1,4 +1,5 @@
 package com.springboot.validation;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -8,10 +9,8 @@ import com.springboot.Repository.UsersRepository;
 
 public class EmailExistsValidator implements ConstraintValidator<UniqueEmail, String> {
 
- @Autowired
+  @Autowired
   private UsersRepository usersRepository;
-
-  
 
   @Override
   public boolean isValid(String email, ConstraintValidatorContext context) {

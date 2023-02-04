@@ -18,27 +18,27 @@ import jakarta.persistence.Query;
 
 @Service
 public class UsersService implements UserDetailsService {
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	private UsersRepository usersRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public Users_  addUser(Users_ users) throws Exception {
-		
+	public Users_ addUser(Users_ users) throws Exception {
+
 		users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
 		return usersRepository.save(users);
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Users_> users=usersRepository.findByUserName(username);
+		Optional<Users_> users = usersRepository.findByUserName(username);
 		return users.map(UserDetailsImpl::new)
-				.orElseThrow(()-> new UsernameNotFoundException("Username not found"));
-			}
+				.orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+	}
 
 }
