@@ -11,18 +11,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.springboot.model.Users_;
 
-public class UserDetailsImpl implements UserDetails{
-	
+public class UserDetailsImpl implements UserDetails {
+
 	private String username;
 	private String password;
 	private List<GrantedAuthority> authorities;
-	
-	
+
 	public UserDetailsImpl(Users_ users) {
-		
-		this.username=users.getUserName();
-		this.password=users.getPassword();
-		this.authorities=Arrays.stream(users.getRole().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+
+		this.username = users.getUserName();
+		this.password = users.getPassword();
+		this.authorities = Arrays.stream(users.getRole().split(",")).map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 	}
 
 	@Override

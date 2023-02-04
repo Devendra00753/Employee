@@ -24,9 +24,9 @@ public class Users_ {
 	@Size(min = 3, max = 20, message = "Username must be between 3 to 20 characters")
 	@Pattern(regexp = "^[a-zA-Z0-9 ]+$", message = "Username can only contain letters and numbers")
 	private String userName;
-	
-	@Email(message = "Ivalid Email")   
-//	@UniqueEmail(message="email already exists")
+
+	@Email(message = "Ivalid Email")
+	// @UniqueEmail(message="email already exists")
 	@NotBlank(message = "Email is required")
 	private String email;
 
@@ -39,7 +39,7 @@ public class Users_ {
 	@Size(min = 8, message = "Password must be 8 characters")
 	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}", message = "Password must be combination of Upper Case ,Lower Case, Numbers and Special characters")
 	private String password;
-	
+
 	private String role;
 
 	public Long getId() {
