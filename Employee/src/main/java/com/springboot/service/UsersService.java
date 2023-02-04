@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 import com.springboot.Repository.UsersRepository;
 import com.springboot.model.Users_;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+
 @Service
 public class UsersService implements UserDetailsService {
 	
@@ -21,7 +25,11 @@ public class UsersService implements UserDetailsService {
 	@Autowired
 	private UsersRepository usersRepository;
 
-	public Users_  addUser(Users_ users)  {
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	public Users_  addUser(Users_ users) throws Exception {
+		
 		users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
 		return usersRepository.save(users);
 	}
