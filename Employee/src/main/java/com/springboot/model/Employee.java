@@ -18,12 +18,12 @@ public class Employee {
 	private Long id;
 	@NotBlank(message = "Name is required")
 	@Size(min = 3, max = 20, message = "Name must be between 3 to 20 characters")
-	@Pattern(regexp = "^[a-zA-Z]+$", message = "Name can only contain letters ")
+	@Pattern(regexp = "^[a-zA-Z ]+$", message = "Name can only contain letters ")
 	private String name;
 	
 	@NotBlank(message = "designation is required")
 	@Size(min = 3, max = 20, message = "designation must be between 3 to 20 characters")
-	@Pattern(regexp = "^[a-zA-Z]+$", message = "designation can only contain letters ")
+	@Pattern(regexp = "^[a-zA-Z ]+$", message = "designation can only contain letters ")
 	private String designation;
 	
 	@NotBlank(message = "Salary is required")

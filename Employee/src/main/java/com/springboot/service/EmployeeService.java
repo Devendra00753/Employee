@@ -9,6 +9,8 @@ import com.springboot.model.Employee;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 
 @Service
 public class EmployeeService {
@@ -32,8 +34,14 @@ public class EmployeeService {
 	}
 	
 	//delete employeeById
+	@Transactional
 	public void deleteEmployeeById(Long id) {
+	    Query query = entityManager.createQuery("SELECT MAX(e.id) FROM Employee e");
+	    Long maxId=(Long) query.getSingleResult();
 		 employeeRepository.deleteById(id);
+		 employeeRepository.updateIds(id, maxId);
+
+
 	}
 	
 	// find By Id
