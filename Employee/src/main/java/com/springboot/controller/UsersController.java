@@ -6,10 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springboot.Repository.UsersRepository;
 import com.springboot.model.Users_;
 import com.springboot.service.UsersService;
 
@@ -20,7 +19,12 @@ public class UsersController {
 
 	@Autowired
 	private UsersService usersService;
+	
 
+	@Autowired
+	private UsersRepository usersRepository;
+
+	
 	@GetMapping("/home")
 	public String home() {
 		return "Users/home";
@@ -35,13 +39,19 @@ public class UsersController {
 	}
 
 	@RequestMapping("/reg")
-	public String reg(@Valid @ModelAttribute("newUser") Users_ users, BindingResult result, Model model) {
+	public String reg(@Valid @ModelAttribute("newUser") Users_ users, BindingResult result, Model model) throws Exception {
+						
+		Users_ existingUser = usersRepository.findByEmail(users.getEmail());
+		if (existingUser != null) {
+		    result.rejectValue("email", "Duplicate.user.email", "Email already exists");
+		 }
 		if (result.hasErrors()) {
 			return "Users/signup";
-		}
+			}
+			
 		usersService.addUser(users);
 		return "redirect:/signup?success=true";
-
+		
 	}
 
 	@GetMapping("/signin")
